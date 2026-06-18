@@ -44,7 +44,7 @@ The player sees N cards (default 5) showing letters A–E in a shuffled order. T
 
 ## Animations
 
-- **Card swap**: Cards physically slide to each other's positions (~300ms CSS transition).
+- **Card swap**: Pixel offsets measured via `getBoundingClientRect()` on card refs, then applied as `--anim-dx` CSS custom property driving a `@keyframes card-slide` animation (~300ms). State updates after the animation completes.
 - **Card selection**: Immediate lift + border color change on click.
 - **Win**: `canvas-confetti` burst.
 - **Sound**: None.
@@ -67,21 +67,30 @@ The player sees N cards (default 5) showing letters A–E in a shuffled order. T
 - **Confetti**: `canvas-confetti`
 - **Deployment**: GitHub Pages — repo name `rightplace-web`, Vite `base: '/rightplace-web/'`
 
-## Project Structure (planned)
+## Development
+
+```bash
+npm run dev      # start dev server at http://localhost:5173/rightplace-web/
+npm run build    # production build → dist/
+npm run deploy   # build + push dist/ to gh-pages branch
+```
+
+## Project Structure
 
 ```
 rightplace-web/
+├── .github/workflows/deploy.yml  ← auto-deploys to GitHub Pages on push to main
 ├── index.html
-├── vite.config.js
+├── vite.config.js                ← base: '/rightplace-web/' for GitHub Pages
 ├── src/
 │   ├── main.jsx
 │   ├── App.jsx
-│   ├── game.js              ← pure game logic (shuffle, score, swap)
+│   ├── game.js                   ← pure game logic (shuffle, score, swap)
 │   ├── components/
-│   │   ├── Card.jsx
-│   │   ├── GameBoard.jsx
-│   │   └── WinScreen.jsx
+│   │   ├── Card.jsx              ← forwardRef; accepts animDx for slide animation
+│   │   ├── GameBoard.jsx         ← all game state + animation orchestration
+│   │   └── WinScreen.jsx         ← modal overlay + canvas-confetti
 │   └── styles/
-│       └── index.css
+│       └── index.css             ← all styles; CSS custom properties for theming
 └── package.json
 ```
