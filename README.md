@@ -2,7 +2,7 @@
 
 A browser-based card-swapping puzzle game. Sort shuffled cards into the correct order — one swap at a time.
 
-**[Play it live →](https://icrazy.github.io/rightplace-web/)**
+**[Play it live →](https://kuanghe-dev.github.io/rightplace-web/)**
 
 ## How to Play
 
@@ -18,11 +18,11 @@ A browser-based card-swapping puzzle game. Sort shuffled cards into the correct 
 |---|---|
 | Letters | A → G |
 | Rainbow | Red → Violet (spectrum order) |
+| Emojis | 😊 → 😡 |
+| Fruits | 🍎 → 🍇 |
 | Weekdays | Mon → Sun |
 | Planets | Mercury → Uranus (distance from Sun) |
 | Notes | Do → Ti (solfège scale) |
-| Emojis | 😊 → 😡 |
-| Fruits | 🍎 → 🍇 |
 
 ## Development
 
