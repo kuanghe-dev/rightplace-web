@@ -4,7 +4,7 @@
 
 ## Architecture
 
-**`src/cardTypes.js`** — single source of truth for the 5 content types. Each type has `items` (canonical ordered array, max 7), `emoji`, `hint` (ordering hint shown in welcome), and `meta` (rainbow only: `{ label, color }` per item). Adding a new type means adding an entry here and a case in `Card.jsx` if it needs custom rendering.
+**`src/cardTypes.js`** — single source of truth for the 7 content types. Each type has `items` (canonical ordered array, max 7), `emoji`, `hint` (ordering hint shown in welcome), and `meta` (rainbow only: `{ label, color }` per item). Adding a new type means adding an entry here and a case in `Card.jsx` if it needs custom rendering.
 
 **`src/game.js`** — pure functions, no React. `createShuffled(canonical)` shuffles a copy of the canonical array until at most 1 card is in the correct position (guarantees the puzzle starts with at most 1 freebie). `score(current, canonical)` counts correct positions. `swap(arr, i, j)` returns a new array.
 
@@ -14,7 +14,7 @@
 
 **`src/components/GameBoard.jsx`** — owns all game state. Derives `canonical` via `useMemo` from props. Animation: measures `getBoundingClientRect()` on both cards, sets `--anim-dx` CSS custom property, waits 300ms for CSS animation to finish, then commits the state swap.
 
-**`src/components/Card.jsx`** — `forwardRef` (refs needed for animation measurements). Adds `.card--text-sm` for multi-character text types (26px font), `.card--rainbow` + dot element for the rainbow type.
+**`src/components/Card.jsx`** — `forwardRef` (refs needed for animation measurements). Adds `.card--text-sm` for multi-character text types (26px font), `.card--rainbow` + dot element for the rainbow type. Emoji-based types (`emojis`, `fruits`) are excluded from `.card--text-sm` even though their items have `.length > 1` as surrogate pairs.
 
 **`src/components/WinScreen.jsx`** — modal overlay, fires `canvas-confetti` on mount.
 

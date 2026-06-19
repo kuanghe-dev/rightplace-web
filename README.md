@@ -21,6 +21,8 @@ A browser-based card-swapping puzzle game. Sort shuffled cards into the correct 
 | Weekdays | Mon → Sun |
 | Planets | Mercury → Uranus (distance from Sun) |
 | Notes | Do → Ti (solfège scale) |
+| Emojis | 😊 → 😡 |
+| Fruits | 🍎 → 🍇 |
 
 ## Development
 
