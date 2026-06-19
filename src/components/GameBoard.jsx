@@ -1,16 +1,22 @@
-import { useState, useRef, useCallback } from 'react'
+import { useState, useRef, useCallback, useMemo } from 'react'
 import { createShuffled, score, swap } from '../game.js'
+import { CARD_TYPES } from '../cardTypes.js'
 import Card from './Card.jsx'
 import WinScreen from './WinScreen.jsx'
 
-export default function GameBoard({ cardCount, onMenu }) {
-  const [letters, setLetters] = useState(() => createShuffled(cardCount))
+export default function GameBoard({ cardCount, cardType, onMenu }) {
+  const canonical = useMemo(
+    () => CARD_TYPES[cardType].items.slice(0, cardCount),
+    [cardType, cardCount]
+  )
+
+  const [cards, setCards] = useState(() => createShuffled(canonical))
   const [selected, setSelected] = useState([])
   const [swapCount, setSwapCount] = useState(0)
   const [animPair, setAnimPair] = useState(null) // { a, b, dxA, dxB }
   const cardRefs = useRef([])
 
-  const correct = score(letters)
+  const correct = score(cards, canonical)
   const won = correct === cardCount
   const swapping = animPair !== null
 
@@ -35,18 +41,18 @@ export default function GameBoard({ cardCount, onMenu }) {
     setAnimPair({ a, b, dxA: dx, dxB: -dx })
 
     setTimeout(() => {
-      setLetters(prev => swap(prev, a, b))
+      setCards(prev => swap(prev, a, b))
       setSwapCount(c => c + 1)
       setAnimPair(null)
     }, 300)
   }, [selected, swapping])
 
   const handlePlayAgain = useCallback(() => {
-    setLetters(createShuffled(cardCount))
+    setCards(createShuffled(canonical))
     setSelected([])
     setSwapCount(0)
     setAnimPair(null)
-  }, [cardCount])
+  }, [canonical])
 
   return (
     <main className="game">
@@ -56,17 +62,18 @@ export default function GameBoard({ cardCount, onMenu }) {
       </div>
 
       <div className="game__position-numbers">
-        {letters.map((_, i) => (
+        {cards.map((_, i) => (
           <span key={i} className="game__position-number">{i + 1}</span>
         ))}
       </div>
 
       <div className="game__cards">
-        {letters.map((letter, i) => (
+        {cards.map((item, i) => (
           <Card
             key={i}
             ref={el => { cardRefs.current[i] = el }}
-            letter={letter}
+            item={item}
+            cardType={cardType}
             position={i}
             selected={selected.includes(i)}
             animDx={animPair?.a === i ? animPair.dxA : animPair?.b === i ? animPair.dxB : undefined}

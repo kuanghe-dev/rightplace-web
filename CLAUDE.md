@@ -4,7 +4,7 @@ A browser-based card-swapping puzzle game. See [rightplace.md](rightplace.md) fo
 
 ## Concept
 
-The player sees N cards (default 5) showing letters A–E in a shuffled order. The goal is to sort them back into alphabetical order by swapping two cards at a time. The game shows how many cards are currently in the correct position after each swap. The game ends when all cards are in the correct position.
+The player sees N cards (default 5) in a shuffled order. The goal is to sort them into the correct order by swapping two cards at a time. The game shows how many cards are currently in the correct position after each swap. The game ends when all cards are in the correct position.
 
 ## Rules
 
@@ -13,18 +13,39 @@ The player sees N cards (default 5) showing letters A–E in a shuffled order. T
 - After swapping, the correct-position count updates.
 - Win condition: all N cards are in their correct positions.
 - On win: confetti is shown, along with the total number of swaps taken.
-- After winning, a "Play Again" button restarts with a new shuffle (same card count).
+- After winning, a "Play Again" button restarts with a new shuffle (same card count and type).
+
+## Welcome Screen
+
+Shown on startup. Lets the player configure two things before starting:
+
+- **Card content** (5 options): Letters (A–G), Rainbow (red→violet), Weekdays (Mon–Sun), Planets (Mer–Ura), Notes (Do–Ti). Each button shows the ordering hint so the player knows what to aim for.
+- **Card count**: 3–7 cards, default 5.
+
+A **Menu** button in the game header returns to the welcome screen at any time.
+
+## Card Content Types
+
+All types support 3–7 cards (first N items from the ordered list).
+
+| Type | Ordered items | Notes |
+|---|---|---|
+| Letters | A B C D E F G | default |
+| Rainbow | Red Orange Yellow Green Blue Indigo Violet | cards show a colored dot |
+| Weekdays | Mon Tue Wed Thu Fri Sat Sun | |
+| Planets | Mer Ven Ear Mar Jup Sat Ura | Mercury → Uranus |
+| Notes | Do Re Mi Fa Sol La Ti | solfège scale |
 
 ## UI / Interaction
 
-- **Cards**: Playing-card style, large, letter centered.
+- **Cards**: Playing-card style, large, content centered. Multi-character text types use a smaller font (`card--text-sm`). Rainbow cards show a colored dot + color name (`card--rainbow`).
 - **Position numbers**: Shown above the cards (1, 2, 3, … N), small and subtle.
 - **Selection**: Click a card to select it (bold teal border + lifts up ~10px). Click again to deselect.
 - **Swap button**: Disabled until exactly 2 cards are selected. Clicking it performs the swap, animates the cards sliding to their new positions (~300ms), then clears the selection.
 - **Swap counter**: Always visible, shows total swaps made so far.
 - **Correct count**: Displayed below the cards, centered. Format: "Correct: N of 5".
 - **Win screen**: Modal overlay on top of the board (cards remain visible underneath). Shows confetti + swap count + "Play Again" button.
-- **Play Again**: Restarts with a new shuffle, same card count. No settings menu.
+- **Play Again**: Restarts with a new shuffle, same card count and type.
 
 ## Design
 
@@ -51,14 +72,9 @@ The player sees N cards (default 5) showing letters A–E in a shuffled order. T
 
 ## Responsive / Mobile
 
-- Basic responsive support in v1.
-- Single CSS breakpoint: shrink card size on narrow viewports.
+- Single CSS breakpoint at 560px: shrinks card size.
+- At 7 cards on mobile: 7 × 64px + 6 × 10px gap = 508px — fits narrow viewports.
 - Tap-to-select works on touch devices (no swipe gestures needed).
-
-## Planned future features (not in v1)
-
-- Configurable card count (not just 5).
-- Configurable card content: letters, emojis, national flags.
 
 ## Tech Stack
 
@@ -84,11 +100,13 @@ rightplace-web/
 ├── vite.config.js                ← base: '/rightplace-web/' for GitHub Pages
 ├── src/
 │   ├── main.jsx
-│   ├── App.jsx
-│   ├── game.js                   ← pure game logic (shuffle, score, swap)
+│   ├── App.jsx                   ← screen state (welcome → game)
+│   ├── game.js                   ← pure game logic (shuffle, score, swap); works with any items array
+│   ├── cardTypes.js              ← ordered items + metadata for all 5 content types
 │   ├── components/
-│   │   ├── Card.jsx              ← forwardRef; accepts animDx for slide animation
+│   │   ├── Card.jsx              ← forwardRef; renders text or rainbow dot based on cardType
 │   │   ├── GameBoard.jsx         ← all game state + animation orchestration
+│   │   ├── WelcomeScreen.jsx     ← type picker + card count picker
 │   │   └── WinScreen.jsx         ← modal overlay + canvas-confetti
 │   └── styles/
 │       └── index.css             ← all styles; CSS custom properties for theming

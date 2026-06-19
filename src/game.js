@@ -1,11 +1,9 @@
-export function createShuffled(size) {
-  const letters = Array.from({ length: size }, (_, i) =>
-    String.fromCharCode(65 + i)
-  )
+export function createShuffled(canonical) {
+  const arr = [...canonical]
   do {
-    shuffle(letters)
-  } while (score(letters) === size)
-  return letters
+    shuffle(arr)
+  } while (score(arr, canonical) === canonical.length)
+  return arr
 }
 
 function shuffle(arr) {
@@ -15,12 +13,12 @@ function shuffle(arr) {
   }
 }
 
-export function score(letters) {
-  return letters.filter((l, i) => l === String.fromCharCode(65 + i)).length
+export function score(current, canonical) {
+  return current.filter((item, i) => item === canonical[i]).length
 }
 
-export function swap(letters, i, j) {
-  const next = [...letters]
+export function swap(arr, i, j) {
+  const next = [...arr]
   ;[next[i], next[j]] = [next[j], next[i]]
   return next
 }

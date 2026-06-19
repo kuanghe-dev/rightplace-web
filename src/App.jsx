@@ -3,10 +3,10 @@ import WelcomeScreen from './components/WelcomeScreen.jsx'
 import GameBoard from './components/GameBoard.jsx'
 
 export default function App() {
-  const [cardCount, setCardCount] = useState(null)
+  const [config, setConfig] = useState(null) // { cardCount, cardType }
 
-  if (cardCount === null) {
-    return <WelcomeScreen onStart={setCardCount} />
+  if (config === null) {
+    return <WelcomeScreen onStart={setConfig} />
   }
-  return <GameBoard cardCount={cardCount} onMenu={() => setCardCount(null)} />
+  return <GameBoard {...config} onMenu={() => setConfig(null)} />
 }
