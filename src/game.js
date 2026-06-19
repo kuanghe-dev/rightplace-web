@@ -2,7 +2,7 @@ export function createShuffled(canonical) {
   const arr = [...canonical]
   do {
     shuffle(arr)
-  } while (score(arr, canonical) === canonical.length)
+  } while (score(arr, canonical) > 1)
   return arr
 }
 
