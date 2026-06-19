@@ -44,6 +44,12 @@ export const CARD_TYPES = {
     hint: '😊 → 😡',
     items: ['😊', '😃', '😍', '😂', '😨', '😱', '😡'],
   },
+  fruits: {
+    label: 'Fruits',
+    emoji: '🍎',
+    hint: '🍎 → 🍇',
+    items: ['🍎', '🍌', '🍒', '🥝', '🍓', '🍉', '🍇'],
+  },
 }
 
-export const TYPE_ORDER = ['letters', 'rainbow', 'weekdays', 'planets', 'notes', 'emojis']
+export const TYPE_ORDER = ['letters', 'rainbow', 'weekdays', 'planets', 'notes', 'emojis', 'fruits']
