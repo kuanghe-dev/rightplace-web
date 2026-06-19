@@ -4,12 +4,7 @@ A browser-based card-swapping puzzle game. Sort shuffled cards into the correct 
 
 **[Play it live →](https://kuanghe-dev.github.io/rightplace-web/)**
 
-<table>
-  <tr>
-    <td><img src="docs/screenshot-welcome.png" alt="Welcome screen" width="400"></td>
-    <td><img src="docs/screenshot-game.png" alt="Game screen" width="400"></td>
-  </tr>
-</table>
+<img src="docs/screenshot-welcome.png" alt="Welcome screen" width="360">&nbsp;<img src="docs/screenshot-game.png" alt="Game screen" width="360">
 
 ## How to Play
 
