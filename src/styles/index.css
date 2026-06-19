@@ -38,6 +38,124 @@ body {
 
 #root { width: 100%; }
 
+/* ── Welcome screen ──────────────────────────────────── */
+.welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding: 48px 24px;
+  max-width: 520px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.welcome__title {
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--text-title);
+  letter-spacing: -0.5px;
+}
+
+.welcome__tagline {
+  font-size: 17px;
+  color: var(--text-label);
+  line-height: 1.5;
+}
+
+.welcome__how {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  padding: 24px 28px;
+  text-align: left;
+  width: 100%;
+}
+
+.welcome__how-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--border-selected);
+  margin-bottom: 12px;
+}
+
+.welcome__steps {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.welcome__steps li {
+  font-size: 15px;
+  color: var(--text-label);
+  line-height: 1.5;
+}
+
+.welcome__steps strong { color: var(--text-title); }
+
+.welcome__setup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.welcome__setup-label {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.welcome__count-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.welcome__count-btn {
+  width: 44px;
+  height: 44px;
+  background: var(--bg-card);
+  color: var(--text-label);
+  border: 2px solid var(--border-card);
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, box-shadow 0.15s;
+}
+
+.welcome__count-btn:hover {
+  border-color: var(--border-selected);
+  color: var(--text-title);
+}
+
+.welcome__count-btn--active {
+  border-color: var(--border-selected);
+  color: var(--border-selected);
+  box-shadow: 0 0 12px var(--glow-selected);
+}
+
+.btn-start {
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border: none;
+  border-radius: 8px;
+  padding: 13px 40px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-start:hover { background: var(--btn-hover); }
+
 /* ── Game layout ─────────────────────────────────────── */
 .game {
   display: flex;
@@ -47,11 +165,34 @@ body {
   padding: 40px 20px;
 }
 
+.game__header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
 .game__title {
   font-size: 32px;
   font-weight: 700;
   color: var(--text-title);
   letter-spacing: -0.5px;
+}
+
+.btn-menu {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border-card);
+  border-radius: 6px;
+  padding: 5px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.btn-menu:hover {
+  color: var(--text-label);
+  border-color: var(--text-muted);
 }
 
 .game__position-numbers {

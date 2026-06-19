@@ -3,17 +3,15 @@ import { createShuffled, score, swap } from '../game.js'
 import Card from './Card.jsx'
 import WinScreen from './WinScreen.jsx'
 
-const SIZE = 5
-
-export default function GameBoard() {
-  const [letters, setLetters] = useState(() => createShuffled(SIZE))
+export default function GameBoard({ cardCount, onMenu }) {
+  const [letters, setLetters] = useState(() => createShuffled(cardCount))
   const [selected, setSelected] = useState([])
   const [swapCount, setSwapCount] = useState(0)
   const [animPair, setAnimPair] = useState(null) // { a, b, dxA, dxB }
   const cardRefs = useRef([])
 
   const correct = score(letters)
-  const won = correct === SIZE
+  const won = correct === cardCount
   const swapping = animPair !== null
 
   const handleCardClick = useCallback((index) => {
@@ -44,15 +42,18 @@ export default function GameBoard() {
   }, [selected, swapping])
 
   const handlePlayAgain = useCallback(() => {
-    setLetters(createShuffled(SIZE))
+    setLetters(createShuffled(cardCount))
     setSelected([])
     setSwapCount(0)
     setAnimPair(null)
-  }, [])
+  }, [cardCount])
 
   return (
     <main className="game">
-      <h1 className="game__title">RightPlace</h1>
+      <div className="game__header">
+        <h1 className="game__title">RightPlace</h1>
+        <button className="btn-menu" onClick={onMenu}>Menu</button>
+      </div>
 
       <div className="game__position-numbers">
         {letters.map((_, i) => (
@@ -75,7 +76,7 @@ export default function GameBoard() {
       </div>
 
       <p className="game__score">
-        Correct: <strong>{correct}</strong> of {SIZE}
+        Correct: <strong>{correct}</strong> of {cardCount}
       </p>
 
       <div className="game__controls">
