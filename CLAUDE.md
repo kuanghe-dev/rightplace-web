@@ -6,7 +6,7 @@
 
 **`src/cardTypes.js`** — single source of truth for the 5 content types. Each type has `items` (canonical ordered array, max 7), `emoji`, `hint` (ordering hint shown in welcome), and `meta` (rainbow only: `{ label, color }` per item). Adding a new type means adding an entry here and a case in `Card.jsx` if it needs custom rendering.
 
-**`src/game.js`** — pure functions, no React. `createShuffled(canonical)` shuffles a copy of the canonical array until it's not already solved. `score(current, canonical)` counts correct positions. `swap(arr, i, j)` returns a new array.
+**`src/game.js`** — pure functions, no React. `createShuffled(canonical)` shuffles a copy of the canonical array until at most 1 card is in the correct position (guarantees the puzzle starts with at most 1 freebie). `score(current, canonical)` counts correct positions. `swap(arr, i, j)` returns a new array.
 
 **`src/App.jsx`** — holds `config` state (`null` = welcome screen, `{ cardCount, cardType }` = in-game). Renders `WelcomeScreen` or `GameBoard` accordingly.
 
