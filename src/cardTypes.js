@@ -20,6 +20,18 @@ export const CARD_TYPES = {
       violet: { label: 'Violet', color: '#A855F7' },
     },
   },
+  emojis: {
+    label: 'Emojis',
+    emoji: '😊',
+    hint: '😊 → 😡',
+    items: ['😊', '😃', '😍', '😂', '😨', '😱', '😡'],
+  },
+  fruits: {
+    label: 'Fruits',
+    emoji: '🍎',
+    hint: '🍎 → 🍇',
+    items: ['🍎', '🍌', '🍒', '🥝', '🍓', '🍉', '🍇'],
+  },
   weekdays: {
     label: 'Weekdays',
     emoji: '📅',
@@ -38,18 +50,6 @@ export const CARD_TYPES = {
     hint: 'Do → Ti',
     items: ['Do', 'Re', 'Mi', 'Fa', 'Sol', 'La', 'Ti'],
   },
-  emojis: {
-    label: 'Emojis',
-    emoji: '😊',
-    hint: '😊 → 😡',
-    items: ['😊', '😃', '😍', '😂', '😨', '😱', '😡'],
-  },
-  fruits: {
-    label: 'Fruits',
-    emoji: '🍎',
-    hint: '🍎 → 🍇',
-    items: ['🍎', '🍌', '🍒', '🥝', '🍓', '🍉', '🍇'],
-  },
 }
 
-export const TYPE_ORDER = ['letters', 'rainbow', 'weekdays', 'planets', 'notes', 'emojis', 'fruits']
+export const TYPE_ORDER = ['letters', 'rainbow', 'emojis', 'fruits', 'weekdays', 'planets', 'notes']
