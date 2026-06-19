@@ -38,6 +38,12 @@ export const CARD_TYPES = {
     hint: 'Do → Ti',
     items: ['Do', 'Re', 'Mi', 'Fa', 'Sol', 'La', 'Ti'],
   },
+  emojis: {
+    label: 'Emojis',
+    emoji: '😊',
+    hint: '😊 → 😡',
+    items: ['😊', '😃', '😍', '😂', '😨', '😱', '😡'],
+  },
 }
 
-export const TYPE_ORDER = ['letters', 'rainbow', 'weekdays', 'planets', 'notes']
+export const TYPE_ORDER = ['letters', 'rainbow', 'weekdays', 'planets', 'notes', 'emojis']

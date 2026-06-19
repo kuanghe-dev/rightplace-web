@@ -4,7 +4,7 @@ import { CARD_TYPES } from '../cardTypes.js'
 const Card = forwardRef(function Card({ item, cardType, position, selected, animDx, onClick }, ref) {
   const animating = animDx !== undefined
   const isRainbow = cardType === 'rainbow'
-  const isSmallText = !isRainbow && item.length > 1
+  const isSmallText = !isRainbow && cardType !== 'emojis' && item.length > 1
 
   const className = [
     'card',
