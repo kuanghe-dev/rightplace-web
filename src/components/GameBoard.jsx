@@ -55,7 +55,7 @@ export default function GameBoard({ cardCount, cardType, onMenu }) {
   }, [canonical])
 
   return (
-    <main className="game">
+    <main className="game" style={{ '--card-count': cardCount }}>
       <div className="game__header">
         <h1 className="game__title">RightPlace</h1>
         <button className="btn-menu" onClick={onMenu}>Menu</button>

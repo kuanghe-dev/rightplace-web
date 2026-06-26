@@ -18,13 +18,14 @@
 
 **`src/components/WinScreen.jsx`** — modal overlay, fires `canvas-confetti` on mount.
 
-**`src/styles/index.css`** — all styles. Uses CSS custom properties for theming and `--anim-dx` / `--card-*` variables. Single breakpoint at 560px shrinks card dimensions.
+**`src/styles/index.css`** — all styles. Uses CSS custom properties for theming and `--anim-dx` / `--card-*` variables. Single breakpoint at 560px shrinks card dimensions; within that breakpoint, `.game` overrides `--card-width` with a `min()` formula that scales cards down further when many cards would otherwise overflow the viewport (uses `--card-count` set inline by `GameBoard`).
 
 ## Key Decisions
 
 - **Card animation**: CSS `@keyframes card-slide` driven by `--anim-dx` rather than JS-controlled transitions, so the browser handles the easing. State updates happen after `setTimeout(300ms)` to match the animation duration.
 - **Game state lives in GameBoard, not App**: App only tracks whether you're on the welcome screen. This keeps the welcome/game split clean without lifting game state up unnecessarily.
 - **No card type switching mid-game**: config is fixed at game start. Menu button returns to welcome screen, which resets config.
+- **Responsive card sizing**: `GameBoard` sets `--card-count` as an inline CSS custom property on the `.game` element. The mobile media query uses `min(64px, calc((100vw - 40px - (count-1) * gap) / count))` so cards always fill the available width without overflowing on narrow screens like iPhone 13.
 
 ## Deployment
 

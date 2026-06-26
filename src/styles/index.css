@@ -417,7 +417,17 @@ body {
     --card-gap:    10px;
   }
 
+  /* Scale cards down when many cards would overflow the viewport.
+     --card-count is set inline by GameBoard for the active game. */
+  .game {
+    --card-width:  min(64px, calc((100vw - 40px - (var(--card-count, 5) - 1) * var(--card-gap)) / var(--card-count, 5)));
+    --card-height: calc(var(--card-width) * 1.41);
+    --card-font:   calc(var(--card-width) * 0.5);
+  }
+
   .card--text-sm { font-size: 18px; }
+  .game .card--text-sm { font-size: calc(var(--card-width) * 0.28); }
   .card__dot { width: 34px; height: 34px; }
+  .game .card__dot { width: calc(var(--card-width) * 0.53); height: calc(var(--card-width) * 0.53); }
   .win-box { padding: 32px 24px; }
 }
